@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import '../ExpenseForm/ExpenseForm.css';
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
     const [title, setTitle] = useState('');
     const [amount, setAmount] = useState('');
     const [date, setDate] = useState('');
 
     const titleChange = (e) => {
-        setTitle((prevState) => {
-            return {...prevState, title: e.target.value}
-        })
+        setTitle(e.target.value)
     }
     const amountChange = (e) => {
         setAmount(e.target.value)
@@ -26,8 +24,7 @@ const ExpenseForm = () => {
             amount: amount,
             date: new Date(date)
         }
-
-        console.log(expenseData);
+        props.onSaveExpenseData(expenseData);
         setTitle('');
         setAmount('');
         setDate('');
@@ -58,7 +55,7 @@ const ExpenseForm = () => {
                     <label>Date</label>
                     <input
                         type='date'
-                        min='2023-01-01'
+                        min='2022-01-01'
                         max='2024-12-31'
                         value={date}
                         onChange={dateChange}
